@@ -7,13 +7,9 @@ class ListNode {
 class LinkedList {
   constructor() {
     this.head = new ListNode(-1);
-    this.tail = this.head;
+    this.tail = this.head; //tail é basicamente um POINTER para o ultimo elemento da lista
   }
 
-  /**
-   * @param {number} index
-   * @return {number}
-   */
   get(index) {
     let curr = this.head.next;
     let pointer = 0;
@@ -27,10 +23,6 @@ class LinkedList {
     return -1;
   }
 
-  /**
-   * @param {number} val
-   * @return {void}
-   */
   insertHead(val) {
     let node = new ListNode(val);
     node.next = this.head.next;
@@ -40,20 +32,12 @@ class LinkedList {
     }
   }
 
-  /**
-   * @param {number} val
-   * @return {void}
-   */
   insertTail(val) {
     let node = new ListNode(val);
     this.tail.next = node;
     this.tail = node;
   }
 
-  /**
-   * @param {number} index
-   * @return {boolean}
-   */
   remove(index) {
     let i = 0;
     let curr = this.head;
@@ -62,7 +46,6 @@ class LinkedList {
       curr = curr.next;
     }
 
-    // Remove the node ahead of curr
     if (curr && curr.next) {
       if (curr.next === this.tail) {
         this.tail = curr;
@@ -72,9 +55,7 @@ class LinkedList {
     }
     return false;
   }
-  /**
-   * @return {number[]}
-   */
+
   getValues() {
     let curr = this.head.next;
     let listOfValues = [];
@@ -85,6 +66,7 @@ class LinkedList {
     return listOfValues;
   }
 }
+
 function runTests(tests) {
   tests.forEach(([operations, expectedResult], testIndex) => {
     const linkedList = new LinkedList();
