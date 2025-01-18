@@ -1,64 +1,71 @@
-class ListNode {
-  constructor(val) {
-    this.val = val;
+class Node {
+  /**
+   * @param {number} value The value to be stored in the node
+   */
+  constructor(value) {
+    this.value = value;
     this.next = null;
+    this.prev = null;
   }
 }
 
-class Queue {
-  // Implementing this with dummy nodes would be easier!
+class MyDeque {
   constructor() {
-    this.left = null;
-    this.right = null;
+    this.dummyHead = new Node(-1);
+    this.dummyTail = new Node(-1);
+
+    this.dummyHead.next = this.dummyTail;
+    this.dummyTail.prev = this.dummyHead;
   }
 
-  enqueue(val) {
-    const newNode = new ListNode(val);
-    if (this.right != null) {
-      console.log(this.left);
-      // Queue is not empty
-      this.right.next = newNode;
-      this.right = this.right.next;
-    } else {
-      // Queue is empty
-      this.left = newNode;
-      this.right = newNode;
-    }
+  isEmpty() {
+    return this.dummyHead.next === this.dummyTail;
   }
 
-  dequeue() {
-    if (this.left == null) {
-      // Queue is empty
-      return;
-    }
-    // Remove left node and return value
-    const val = this.left.val;
-    this.left = this.left.next;
-    if (!this.left) {
-      this.right = null;
-    }
-    return val;
+  append(value) {
+    const newNode = new Node(value);
+    newNode.next = this.dummyTail;
+    newNode.prev = this.dummyTail.prev;
+    this.dummyTail.prev.next = newNode;
+    this.dummyTail.prev = newNode;
   }
 
-  print() {
-    let cur = this.left;
-    let s = "";
-    while (cur != null) {
-      s += cur.val + "->";
-      cur = cur.next;
+  appendleft(value) {
+    const newNode = new Node(value);
+    newNode.prev = this.dummyHead;
+    newNode.next = this.dummyHead.next;
+    this.dummyHead.next.prev = newNode;
+    this.dummyHead.next = newNode;
+  }
+
+  /**
+   * @return {void}
+   */
+  pop() {
+    if (this.isEmpty()) {
+      return -1;
     }
-    console.log(s);
+    const targetNode = this.dummyTail.prev;
+    const prevNode = targetNode.prev;
+    const value = targetNode.value;
+
+    this.dummyTail.prev = prevNode;
+    prevNode.next = this.dummyTail;
+
+    return value;
+  }
+
+  popleft() {
+    if (this.isEmpty()) {
+      return -1;
+    }
+    const targetNode = this.dummyHead.next;
+    const nextNode = targetNode.next;
+    const value = targetNode.value;
+
+    this.dummyHead.next = nextNode;
+    nextNode.prev = this.dummyHead;
+
+    return value;
   }
 }
-
-const queue = new Queue();
-
-queue.enqueue(3);
-queue.enqueue(3);
-queue.enqueue(4);
-queue.enqueue(5);
-// queue.enqueue(4);
-// queue.enqueue(5);
-// queue.print();
-// queue.dequeue();
-// queue.print();

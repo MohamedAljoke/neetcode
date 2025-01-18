@@ -8,7 +8,10 @@ type ListNode struct {
 func main() {
 	linkedList1 := generateLinkedListFromArray([]int{1, 2, 4})
 	linkedList2 := generateLinkedListFromArray([]int{1, 3, 4})
-	mergeTwoLists(linkedList1, linkedList2)
+	merged := mergeTwoLists(linkedList1, linkedList2)
+	print("ola", &merged)
+	linkedList1 = generateLinkedListFromArray([]int{1, 1, 4})
+	print("123", &merged)
 }
 
 func generateLinkedListFromArray(numbers []int) *ListNode {
