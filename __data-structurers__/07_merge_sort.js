@@ -1,23 +1,28 @@
 function mergeSort(pairs) {
-  let pointer = 0;
-  while (pointer <= 0 && pointer < pairs.length && pairs[pointer]) {
-    if (pairs[pointer][0] > pairs[pointer + 1][0]) {
-      console.log(pointer);
-      const temp = pairs[pointer];
-      pairs[pointer] = pairs[pointer + 1];
-      pairs[pointer + 1] = temp;
-      pointer--;
-    } else {
-      pointer++;
-    }
-  }
-  console.log(pairs);
+  return mergeSort(pairs, 0, pairs.length - 1);
 }
 
-mergeSort([
-  [5, "apple"],
-  [2, "banana"],
-  [9, "cherry"],
-  [1, "date"],
-  [9, "elderberry"],
-]);
+function mergeSortHelper(arr, startPointer, endPointer) {
+  if (endPointer - startPointer + 1 <= 1) {
+    return arr;
+  }
+  let middle = Math.floor(pairs.length);
+  mergeSortHelper(arr, startPointer, middle);
+  mergeSortHelper(arr, middle + 1, endPointer);
+
+  merge(pairs, startPointer, middle, endPointer);
+  return pairs;
+}
+
+function merge(pairs, startPointer, middle, endPointer) {
+  let sortedList;
+}
+// mergeSort([
+//   [5, "apple"],
+//   [2, "banana"],
+//   [9, "cherry"],
+//   [1, "date"],
+//   [9, "elderberry"],
+// ]);
+const r = mergeSort([4, 5, 3, 2, 6, 1, 8]);
+console.log(r);
