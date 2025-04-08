@@ -1,7 +1,14 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-function climbStairs(n) {}
+function climbStairs(n) {
+  if (n <= 1) {
+    return 1;
+  }
+  const numberOfSteps = climbStairs(n - 1);
+  const numberOfStepsByTwo = climbStairs(n - 2);
+  return numberOfStepsByTwo + numberOfSteps;
+}
 
 function testSolution() {
   test("Solution", async (t) => {
@@ -15,4 +22,6 @@ function testSolution() {
     });
   });
 }
-climbStairs(5);
+testSolution();
+const res = climbStairs(5);
+console.log(res);
